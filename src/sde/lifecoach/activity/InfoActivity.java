@@ -23,6 +23,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +39,7 @@ public class InfoActivity extends Activity {
 	private Boolean threadFinished = false;
 	private SharedPreferences pref;
 	private ProgressBar progress;
+	private Button buttonWeights;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +62,19 @@ public class InfoActivity extends Activity {
 		progress.setVisibility(View.GONE);
 		textViewInfo = (TextView) findViewById(R.id.infouser);
 		new InfoUserTask(getApplicationContext(),token,textViewInfo, progress).execute();
+		
+		buttonWeights = (Button)findViewById(R.id.buttonWeights);
+		buttonWeights.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+				Intent i = new Intent(getApplicationContext(),
+						WeightsActivity.class);
+				startActivity(i);
+				
+			}
+		});
 		
 	}
 

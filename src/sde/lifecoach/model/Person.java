@@ -19,7 +19,7 @@ public class Person implements Serializable {
 	 */
 	private static final long serialVersionUID = -7888564417005646353L;
 
-	private int idPerson;
+	private Long idPerson;
 
 	private String lastname;
 
@@ -27,7 +27,7 @@ public class Person implements Serializable {
 
 	private String username;
 	
-	private Date birthdate;
+	private String birthdate;
 	
 	private String email;
 
@@ -36,11 +36,11 @@ public class Person implements Serializable {
 	public Person() {
 	}
 	
-	public Date getBirthdate() {
+	public String getBirthdate() {
 		return this.birthdate;
 	}
 
-	public void setBirthdate(Date birthdate) {
+	public void setBirthdate(String birthdate) {
 		this.birthdate = birthdate;
 	}
 
@@ -52,11 +52,11 @@ public class Person implements Serializable {
 		this.email = email;
 	}
 
-	public int getIdPerson() {
+	public Long getIdPerson() {
 		return this.idPerson;
 	}
 
-	public void setIdPerson(int idPerson) {
+	public void setIdPerson(Long idPerson) {
 		this.idPerson = idPerson;
 	}
 

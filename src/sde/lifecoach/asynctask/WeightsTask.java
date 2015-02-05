@@ -1,6 +1,7 @@
 package sde.lifecoach.asynctask;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -13,6 +14,9 @@ import com.example.lifecoachapp.R;
 import com.google.gson.Gson;
 
 import sde.lifecoach.activity.AuthenticationActivity;
+import sde.lifecoach.adapter.WeightsAdapter;
+import sde.lifecoach.model.HealthMeasureHistory;
+import sde.lifecoach.model.HealthMeasureHistoryList;
 import sde.lifecoach.model.Person;
 import sde.lifecoach.util.Urls;
 import android.app.Activity;
@@ -21,28 +25,30 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class InfoUserTask extends AsyncTask<Void, Void, Person> {
+public class WeightsTask extends AsyncTask<Void, Void, HealthMeasureHistoryList> {
 
 	String accessToken;
-	Person personInfo;
+	HealthMeasureHistoryList healthHistory;
 	Context context;
 	TextView tViewInfo;
 	private ProgressBar progress;
 	SharedPreferences pref;
+	Activity act;
+	Long idP;
 
-	public InfoUserTask(Context context, String token, TextView tViewInfo, ProgressBar progress) {
+	public WeightsTask(Context context, String token, Activity activity, Long idP) {
 		this.context = context;
 		this.accessToken = token;
-		this.tViewInfo = tViewInfo;
-		this.progress = progress;
+		this.act = activity;
+		this.idP = idP;
 	}
 
 	@Override
@@ -51,20 +57,16 @@ public class InfoUserTask extends AsyncTask<Void, Void, Person> {
 		super.onPreExecute();
 		// progress = ProgressDialog.show(context, "Loading...",
 		// "User data", true);
-		LayoutInflater inflater = (LayoutInflater) context
-				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View v = inflater.inflate(R.layout.info_layout, null);
+		progress = (ProgressBar) act.findViewById(R.id.progressBarWeights);
 		progress.setVisibility(View.VISIBLE);
 		progress.animate();
 		progress.setIndeterminate(true);
-		pref = PreferenceManager
-				.getDefaultSharedPreferences(context);
 	}
 
 	@Override
-	protected Person doInBackground(Void... params) {
+	protected HealthMeasureHistoryList doInBackground(Void... params) {
 		HttpClient client = new DefaultHttpClient();
-		HttpGet get = new HttpGet(Urls.URL_DATA_SERVICE+":6901/sde/person/sync");
+		HttpGet get = new HttpGet(Urls.URL_DATA_SERVICE+":6901/sde/person/"+idP+"/weight/remote");
 
 		get.addHeader("Authorization", "Bearer " + accessToken);
 		get.addHeader("Accept", "*/*");
@@ -86,7 +88,7 @@ public class InfoUserTask extends AsyncTask<Void, Void, Person> {
 		}
 
 		Gson gson = new Gson();
-		personInfo = gson.fromJson(jsonString, Person.class);
+		healthHistory = gson.fromJson(jsonString, HealthMeasureHistoryList.class);
 
 		if (response.getStatusLine().equals(401)) {
 
@@ -97,22 +99,25 @@ public class InfoUserTask extends AsyncTask<Void, Void, Person> {
 			context.startActivity(i);
 		}
 
-		return personInfo;
+		return healthHistory;
 	}
 
 	@Override
-	protected void onPostExecute(Person result) {
+	protected void onPostExecute(HealthMeasureHistoryList result) {
 		// TODO Auto-generated method stub
 		super.onPostExecute(result);
 
 		progress.setVisibility(View.GONE);
 		progress.setIndeterminate(false);
 		
-		tViewInfo.setText(personInfo.getName()+" "+personInfo.getBirthdate());
+		ListView listWeights = (ListView) act.findViewById(R.id.listWeights);
 		
-		SharedPreferences.Editor editor = pref.edit();
-		editor.putLong("personId", result.getIdPerson());
-		editor.commit();
+
+		// get data from the table by the ListAdapter
+		WeightsAdapter weightsAdapter = new WeightsAdapter(context, R.layout.row_list_weights, result.getHistory());
+
+		listWeights.setAdapter(weightsAdapter);
+		
 	}
 
 }
