@@ -1,6 +1,7 @@
 package sde.lifecoach.asynctask;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
 
 import org.apache.http.HttpResponse;
@@ -12,6 +13,7 @@ import org.apache.http.util.EntityUtils;
 
 import com.example.lifecoachapp.R;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import sde.lifecoach.activity.AuthenticationActivity;
 import sde.lifecoach.adapter.WeightsAdapter;
@@ -33,10 +35,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class WeightsTask extends AsyncTask<Void, Void, HealthMeasureHistoryList> {
+public class WeightsTask extends AsyncTask<Void, Void, List<HealthMeasureHistory>> {
 
 	String accessToken;
-	HealthMeasureHistoryList healthHistory;
+	List<HealthMeasureHistory> healthHistory;
 	Context context;
 	TextView tViewInfo;
 	private ProgressBar progress;
@@ -64,12 +66,12 @@ public class WeightsTask extends AsyncTask<Void, Void, HealthMeasureHistoryList>
 	}
 
 	@Override
-	protected HealthMeasureHistoryList doInBackground(Void... params) {
+	protected List<HealthMeasureHistory> doInBackground(Void... params) {
 		HttpClient client = new DefaultHttpClient();
 		HttpGet get = new HttpGet(Urls.URL_DATA_SERVICE+":6901/sde/person/"+idP+"/weight/remote");
 
 		get.addHeader("Authorization", "Bearer " + accessToken);
-		get.addHeader("Accept", "*/*");
+		get.addHeader("Accept", "application/json");
 
 		HttpResponse response = null;
 		String jsonString = null;
@@ -88,7 +90,7 @@ public class WeightsTask extends AsyncTask<Void, Void, HealthMeasureHistoryList>
 		}
 
 		Gson gson = new Gson();
-		healthHistory = gson.fromJson(jsonString, HealthMeasureHistoryList.class);
+		healthHistory = gson.fromJson(jsonString, new TypeToken<List<HealthMeasureHistory>>(){}.getType());
 
 		if (response.getStatusLine().equals(401)) {
 
@@ -103,7 +105,7 @@ public class WeightsTask extends AsyncTask<Void, Void, HealthMeasureHistoryList>
 	}
 
 	@Override
-	protected void onPostExecute(HealthMeasureHistoryList result) {
+	protected void onPostExecute(List<HealthMeasureHistory> result) {
 		// TODO Auto-generated method stub
 		super.onPostExecute(result);
 
@@ -114,7 +116,7 @@ public class WeightsTask extends AsyncTask<Void, Void, HealthMeasureHistoryList>
 		
 
 		// get data from the table by the ListAdapter
-		WeightsAdapter weightsAdapter = new WeightsAdapter(context, R.layout.row_list_weights, result.getHistory());
+		WeightsAdapter weightsAdapter = new WeightsAdapter(context, R.layout.row_list_weights, result);
 
 		listWeights.setAdapter(weightsAdapter);
 		

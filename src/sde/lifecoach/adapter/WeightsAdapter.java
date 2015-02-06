@@ -45,7 +45,7 @@ public class WeightsAdapter extends ArrayAdapter<HealthMeasureHistory> {
 	    	
 	    	
 	    	if(tvWeight != null){
-	    		tvWeight.setText(hm.getValue());
+	    		tvWeight.setText(hm.getValue()+" Kg     ");
 	    	}
 	    	
 	    	if(tvDate != null){
