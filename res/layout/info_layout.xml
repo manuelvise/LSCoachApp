@@ -45,9 +45,28 @@
         android:id="@+id/buttonWeights"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/progressBar1"
-        android:layout_alignRight="@+id/infouser"
-        android:layout_marginBottom="68dp"
+        android:layout_alignLeft="@+id/infouser"
+        android:layout_below="@+id/infouser"
+        android:layout_marginTop="71dp"
         android:text="Weights" />
+
+    <Button
+        android:id="@+id/ButtonActivities"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/buttonWeights"
+        android:layout_alignBottom="@+id/buttonWeights"
+        android:layout_toRightOf="@+id/textViewInfo"
+        android:text="Activities" />
+
+    <Button
+        android:id="@+id/ButtonGoals"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/ButtonActivities"
+        android:layout_alignBottom="@+id/ButtonActivities"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/ButtonActivities"
+        android:text="Goals" />
 
 </RelativeLayout>
