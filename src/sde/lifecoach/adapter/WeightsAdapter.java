@@ -49,7 +49,7 @@ public class WeightsAdapter extends ArrayAdapter<HealthMeasureHistory> {
 	    	}
 	    	
 	    	if(tvDate != null){
-	    		tvDate.setText(String.valueOf(new Date(hm.getTimestamp())));
+	    		tvDate.setText(hm.getTimestamp());
 	    	}
 	    }
 	    

@@ -14,7 +14,7 @@ public class HealthMeasureHistory implements Serializable {
 
 	private int idMeasureHistory;
 
-	private Long timestamp;
+	private String timestamp;
 
 	private String value;
 
@@ -49,11 +49,11 @@ public class HealthMeasureHistory implements Serializable {
 		this.idMeasureHistory = idMeasureHistory;
 	}
 
-	public Long getTimestamp() {
+	public String getTimestamp() {
 		return this.timestamp;
 	}
 
-	public void setTimestamp(Long timestamp) {
+	public void setTimestamp(String timestamp) {
 		this.timestamp = timestamp;
 	}
 
