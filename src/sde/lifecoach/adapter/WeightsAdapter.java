@@ -23,36 +23,38 @@ public class WeightsAdapter extends ArrayAdapter<HealthMeasureHistory> {
 		// TODO Auto-generated constructor stub
 	}
 
-	
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		// TODO Auto-generated method stub
 		View v = convertView;
 
-	    if (v == null) {
+		if (v == null) {
 
-	        LayoutInflater vi;
-	        vi = LayoutInflater.from(getContext());
-	        v = vi.inflate(R.layout.row_list_weights, null);
+			LayoutInflater vi;
+			vi = LayoutInflater.from(getContext());
+			v = vi.inflate(R.layout.row_list_weights, null);
 
-	    }
-	    
-	    HealthMeasureHistory hm = getItem(position);
-	    
-	    if(hm!=null){
-	    	TextView tvWeight = (TextView) v.findViewById(R.id.textViewWeight);
-	    	TextView tvDate = (TextView) v.findViewById(R.id.textViewDate);
-	    	
-	    	
-	    	if(tvWeight != null){
-	    		tvWeight.setText(hm.getValue()+" Kg     ");
-	    	}
-	    	
-	    	if(tvDate != null){
-	    		tvDate.setText(hm.getTimestamp());
-	    	}
-	    }
-	    
+		}
+
+		HealthMeasureHistory hm = getItem(position);
+
+		if (hm != null) {
+			TextView tvWeight = (TextView) v.findViewById(R.id.textViewWeight);
+			TextView tvDate = (TextView) v.findViewById(R.id.textViewDate);
+
+			if (tvWeight != null) {
+				tvWeight.setText(hm.getValue() + " Kg        ");
+			}
+
+			if (tvDate != null) {
+				if (Character.isDigit(hm.getTimestamp().charAt(0))) {
+					tvDate.setText(new Date(Long.valueOf(hm.getTimestamp())).toString());
+				} else {
+					tvDate.setText(hm.getTimestamp());
+				}
+			}
+		}
+
 		return v;
 	}
 
