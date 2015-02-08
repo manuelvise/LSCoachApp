@@ -42,14 +42,14 @@ public class GoalsAdapter extends ArrayAdapter<Goal> {
 		if (g != null) {
 			TextView tvType = (TextView) v.findViewById(R.id.textViewType);
 			TextView tvValue = (TextView) v.findViewById(R.id.textViewValue);
-			TextView tvDate = (TextView) v.findViewById(R.id.textViewDate);
+			TextView tvDate = (TextView) v.findViewById(R.id.textViewDeadline);
 			
 			if(tvType != null){
-				tvType.setText(g.getMeasureDefinition().getMeasureName());
+				tvType.setText("Type:   "+g.getMeasureDefinition().getMeasureName());
 			}
 
 			if (tvValue != null) {
-				tvValue.setText(g.getValue() + " m        ");
+				tvValue.setText("Value:   "+g.getValue());
 			}
 
 			if (tvDate != null) {

@@ -1,9 +1,15 @@
 package sde.lifecoach.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Goal {
+public class Goal implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5691839847646011672L;
 
 	private int idGoal;
 	

@@ -115,10 +115,13 @@ public class AddGoalTask extends AsyncTask<Void, Void, Goal> {
 		progress.setVisibility(View.GONE);
 		progress.setIndeterminate(false);
 			
-
+if(result!=null){
 		Toast.makeText(context,"New goal saved!", 
                 Toast.LENGTH_SHORT).show();
-		
+}else{
+	Toast.makeText(context,"There is an error!", 
+            Toast.LENGTH_SHORT).show();
+}
 	}
 
 }

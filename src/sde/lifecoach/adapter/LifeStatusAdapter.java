@@ -12,6 +12,7 @@ import sde.lifecoach.model.LifeStatus;
 import sde.lifecoach.model.Weight;
 import android.content.Context;
 import android.graphics.Color;
+import android.text.TextUtils.StringSplitter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +48,7 @@ public class LifeStatusAdapter extends ArrayAdapter<LifeStatus> {
 			TextView tvType = (TextView) v.findViewById(R.id.textViewType);
 			TextView tvValue = (TextView) v.findViewById(R.id.textViewValue);
 			TextView tvGoal = (TextView) v.findViewById(R.id.textViewGoal);
+			TextView textViewDiff = (TextView)v.findViewById(R.id.textViewDiff);
 
 			if (tvType != null) {
 				tvType.setText("Type: "
@@ -57,6 +59,7 @@ public class LifeStatusAdapter extends ArrayAdapter<LifeStatus> {
 				tvValue.setText("Value: " + g.getValue());
 			}
 
+			Goal currentGoal = null;
 			if (tvGoal != null) {
 				boolean found = false;
 				if (goals != null) {
@@ -67,23 +70,24 @@ public class LifeStatusAdapter extends ArrayAdapter<LifeStatus> {
 								.equals(g.getMeasureDefinition()
 										.getMeasureName())) {
 							found = true;
+							currentGoal = goal;
 							tvGoal.setText("Deadline: "
 									+ new Date(Long.valueOf(goal.getDeadline()))
 											.toString() + ", value: "
 									+ goal.getValue());
 
-							if ((Long.valueOf(goal.getValue()) > Long.valueOf(g
-									.getValue()))
-									&& goal.getMeasureDefinition()
-											.getMeasureName().equals("weight")) {
-								tvGoal.setBackgroundColor(Color.RED);
-							}
-							if ((Long.valueOf(goal.getValue()) <= Long
-									.valueOf(g.getValue()))
-									&& goal.getMeasureDefinition()
-											.getMeasureName().equals("weight")) {
-								tvGoal.setBackgroundColor(Color.GREEN);
-							}
+//							if ((Long.valueOf(goal.getValue()) > Long.valueOf(g
+//									.getValue()))
+//									&& goal.getMeasureDefinition()
+//											.getMeasureName().equals("weight")) {
+//								tvGoal.setBackgroundColor(Color.RED);
+//							}
+//							if ((Long.valueOf(goal.getValue()) <= Long
+//									.valueOf(g.getValue()))
+//									&& goal.getMeasureDefinition()
+//											.getMeasureName().equals("weight")) {
+//								tvGoal.setBackgroundColor(Color.GREEN);
+//							}
 
 							break;
 						}
@@ -97,6 +101,13 @@ public class LifeStatusAdapter extends ArrayAdapter<LifeStatus> {
 //					tvGoal.setText("No goal setted.");
 //
 //				}
+				
+				if(textViewDiff != null){
+					if(found){
+						Double diff = Double.valueOf(g.getValue())-Double.valueOf(currentGoal.getValue());
+						textViewDiff.setText(String.valueOf(diff));
+					}
+				}
 
 			}
 
