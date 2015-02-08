@@ -1,9 +1,7 @@
 package sde.lifecoach.model;
 
 
-
 import java.io.Serializable;
-
 import java.util.Date;
 import java.util.List;
 
@@ -32,6 +30,8 @@ public class Person implements Serializable {
 	private String email;
 
 	private List<LifeStatus> lifeStatus;
+	
+	private List<Goal> goals;
 	
 	public Person() {
 	}
@@ -90,6 +90,14 @@ public class Person implements Serializable {
 
 	public void setLifeStatus(List<LifeStatus> param) {
 	    this.lifeStatus = param;
+	}
+
+	public List<Goal> getGoals() {
+		return goals;
+	}
+
+	public void setGoals(List<Goal> goals) {
+		this.goals = goals;
 	}
 
 }

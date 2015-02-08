@@ -34,6 +34,21 @@
             android:name="sde.lifecoach.activity.WeightsActivity"
             android:label="@string/title_activity_weights" >
         </activity>
+        <activity
+            android:name="sde.lifecoach.activity.GoalsActivity">
+        </activity>
+        <activity
+            android:name="sde.lifecoach.activity.ActivitiesActivity">
+        </activity>
+        <activity
+            android:name="sde.lifecoach.activity.PeopleActivity">
+        </activity>
+        <activity
+            android:name="sde.lifecoach.activity.LifeStatusActivity">
+        </activity>
+                <activity
+            android:name="sde.lifecoach.activity.AddGoalActivity">
+        </activity>
     </application>
 
 </manifest>

@@ -51,7 +51,17 @@
         android:text="Weights" />
 
     <Button
-        android:id="@+id/ButtonActivities"
+        android:id="@+id/buttonGoals"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/buttonActivities"
+        android:layout_alignBottom="@+id/buttonActivities"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="30dp"
+        android:text="Goals" />
+
+    <Button
+        android:id="@+id/buttonActivities"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/buttonWeights"
@@ -60,13 +70,12 @@
         android:text="Activities" />
 
     <Button
-        android:id="@+id/ButtonGoals"
+        android:id="@+id/buttonApplicationCoach"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/ButtonActivities"
-        android:layout_alignBottom="@+id/ButtonActivities"
-        android:layout_marginLeft="20dp"
-        android:layout_toRightOf="@+id/ButtonActivities"
-        android:text="Goals" />
+        android:layout_alignLeft="@+id/buttonWeights"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="17dp"
+        android:text="Go to Coach / Doctor application" />
 
 </RelativeLayout>

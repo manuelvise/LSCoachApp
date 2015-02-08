@@ -8,6 +8,7 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 
 import sde.lifecoach.asynctask.InfoUserTask;
+import sde.lifecoach.asynctask.PeopleTask;
 import sde.lifecoach.model.Person;
 
 import com.example.lifecoachapp.R;
@@ -24,12 +25,15 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class InfoActivity extends Activity {
+public class PeopleActivity extends Activity {
 
 	private String token;
 	private TextView textViewInfo;
@@ -42,7 +46,6 @@ public class InfoActivity extends Activity {
 	private Button buttonWeights;
 	private Button buttonActivities;
 	private Button buttonGoals;
-	private Button buttonCoach;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -50,77 +53,25 @@ public class InfoActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 
-		setContentView(R.layout.info_layout);
+		setContentView(R.layout.activity_people);
 
-		pref = PreferenceManager
-				.getDefaultSharedPreferences(getApplicationContext());
-		token = pref.getString("token", "");
-
-		if (token == "") {
-			Intent i = new Intent(getApplicationContext(),
-					AuthenticationActivity.class);
-			startActivity(i);
-		}
-		progress = (ProgressBar) findViewById(R.id.progressBar1);
+		progress = (ProgressBar) findViewById(R.id.progressBarWeights);
 		progress.setVisibility(View.GONE);
-		textViewInfo = (TextView) findViewById(R.id.infouser);
-		new InfoUserTask(getApplicationContext(),token,textViewInfo, progress).execute();
+		new PeopleTask(getApplicationContext(),token, progress,PeopleActivity.this).execute();
 		
-		buttonWeights = (Button)findViewById(R.id.buttonWeights);
-		buttonWeights.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				
-				Intent i = new Intent(getApplicationContext(),
-						WeightsActivity.class);
-				startActivity(i);
-				
-			}
-		});
-		
-		buttonActivities = (Button)findViewById(R.id.buttonActivities);
-		buttonActivities.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				
-				Intent i = new Intent(getApplicationContext(),
-						ActivitiesActivity.class);
-				startActivity(i);
-				
-			}
-		});
-		
-		
-		buttonGoals = (Button)findViewById(R.id.buttonGoals);
-		buttonGoals.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				
-				Intent i = new Intent(getApplicationContext(),
-						GoalsActivity.class);
-				startActivity(i);
-				
-			}
-		});
-		
-		
-		buttonCoach = (Button)findViewById(R.id.buttonApplicationCoach);
-		buttonCoach.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				
-				Intent i = new Intent(getApplicationContext(),
-						PeopleActivity.class);
-				i.putExtra("person",personInfo);
-				startActivity(i);
-				
-			}
-		});
-		
+//		ListView listPeople = (ListView)findViewById(R.id.listPeople);
+//		
+//		listPeople.setOnItemClickListener(new OnItemClickListener() {
+//
+//			@Override
+//			public void onItemClick(AdapterView<?> parent, View view,
+//					int position, long id) {
+//				
+//				
+//				
+//			}
+//		});
+//		
 	}
 
 //	private void getInfoUser(final String accessToken) {
