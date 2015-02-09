@@ -11,28 +11,13 @@
     tools:context="sde.lifecoach.activity.WeightsActivity" >
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@android:color/black"
+                android:background="@android:color/holo_blue_light"
         android:id="@+id/weightsTv"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="History of weights" />
-
-    <TextView
-        android:id="@+id/textViewGoal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/black"
-        android:text="Goal: "
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-    
-     <TextView
-        android:id="@+id/textViewDeadline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/black"
-        android:text="Deadline: "
-        android:textAppearance="?android:attr/textAppearanceMedium" />
 
      <ProgressBar
          android:id="@+id/progressBarWeights"

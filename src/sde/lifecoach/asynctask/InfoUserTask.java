@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 import sde.lifecoach.activity.AuthenticationActivity;
 import sde.lifecoach.model.Person;
 import sde.lifecoach.util.Urls;
+import android.R.anim;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -75,12 +76,11 @@ public class InfoUserTask extends AsyncTask<Void, Void, Person> {
 
 		try {
 			response = client.execute(get);
-			
 
 			if (response.getStatusLine().equals(204)) {
 
-				Toast.makeText(context, "Token not valid.",
-						Toast.LENGTH_LONG).show();
+				Toast.makeText(context, "Token not valid.", Toast.LENGTH_LONG)
+						.show();
 
 				Intent i = new Intent(context, AuthenticationActivity.class);
 				context.startActivity(i);
@@ -90,8 +90,7 @@ public class InfoUserTask extends AsyncTask<Void, Void, Person> {
 				jsonString = EntityUtils.toString(response.getEntity());
 			} else {
 				jsonString = "";
-				
-				
+
 			}
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
@@ -125,8 +124,9 @@ public class InfoUserTask extends AsyncTask<Void, Void, Person> {
 		progress.setIndeterminate(false);
 
 		if (result != null) {
-			tViewInfo.setText(personInfo.getName() + " "
-					+ personInfo.getBirthdate());
+			tViewInfo.setBackgroundColor(context.getResources().getColor(android.R.color.holo_blue_light));
+			tViewInfo.setText("Name: " + personInfo.getName()
+					+ ",  Birthdate: " + personInfo.getBirthdate());
 
 			SharedPreferences.Editor editor = pref.edit();
 			editor.putLong("personId", result.getIdPerson());

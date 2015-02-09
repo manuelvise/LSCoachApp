@@ -77,7 +77,7 @@ public class PeopleTask extends AsyncTask<Void, Void, List<Person>> {
 	@Override
 	protected List<Person> doInBackground(Void... params) {
 		HttpClient client = new DefaultHttpClient();
-		HttpGet get = new HttpGet(Urls.URL_DATA_SERVICE+":6901/sde/person");
+		HttpGet get = new HttpGet(Urls.URL_DATA_SERVICE+":6901/sde/person/business");
 
 		get.addHeader("Authorization", "Bearer " + accessToken);
 		get.addHeader("Accept", "application/json");

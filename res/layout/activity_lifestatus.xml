@@ -12,10 +12,11 @@
 
     <TextView
         android:id="@+id/tvPerson"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginRight="10dp"
-        android:text="Lifestatus of:"
+        android:background="@android:color/holo_blue_light"
+        android:text="Lifestatus of: "
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@android:color/black" />
 
@@ -23,7 +24,9 @@
         android:id="@+id/buttonAddGoal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add goal" />
+        android:layout_margin="12dp"
+        android:padding="8dp"
+        android:text=" Add goal " />
 
 
     <ListView

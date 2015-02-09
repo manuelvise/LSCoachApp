@@ -16,6 +16,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import sde.lifecoach.activity.AuthenticationActivity;
+import sde.lifecoach.adapter.ActivitiesAdapter;
 import sde.lifecoach.adapter.WeightsAdapter;
 import sde.lifecoach.model.HealthMeasureHistory;
 import sde.lifecoach.model.HealthMeasureHistoryList;
@@ -116,7 +117,7 @@ public class ActivitiesTask extends AsyncTask<Void, Void, List<HealthMeasureHist
 		
 
 		// get data from the table by the ListAdapter
-		WeightsAdapter weightsAdapter = new WeightsAdapter(context, R.layout.row_list_weights, result);
+		ActivitiesAdapter weightsAdapter = new ActivitiesAdapter(context, R.layout.row_list_activities, result);
 
 		listWeights.setAdapter(weightsAdapter);
 		
