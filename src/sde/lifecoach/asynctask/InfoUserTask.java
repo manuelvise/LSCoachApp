@@ -38,7 +38,8 @@ public class InfoUserTask extends AsyncTask<Void, Void, Person> {
 	private ProgressBar progress;
 	SharedPreferences pref;
 
-	public InfoUserTask(Context context, String token, TextView tViewInfo, ProgressBar progress) {
+	public InfoUserTask(Context context, String token, TextView tViewInfo,
+			ProgressBar progress) {
 		this.context = context;
 		this.accessToken = token;
 		this.tViewInfo = tViewInfo;
@@ -57,14 +58,14 @@ public class InfoUserTask extends AsyncTask<Void, Void, Person> {
 		progress.setVisibility(View.VISIBLE);
 		progress.animate();
 		progress.setIndeterminate(true);
-		pref = PreferenceManager
-				.getDefaultSharedPreferences(context);
+		pref = PreferenceManager.getDefaultSharedPreferences(context);
 	}
 
 	@Override
 	protected Person doInBackground(Void... params) {
 		HttpClient client = new DefaultHttpClient();
-		HttpGet get = new HttpGet(Urls.URL_DATA_SERVICE+":6901/sde/person/sync");
+		HttpGet get = new HttpGet(Urls.URL_DATA_SERVICE
+				+ ":6901/sde/person/sync");
 
 		get.addHeader("Authorization", "Bearer " + accessToken);
 		get.addHeader("Accept", "*/*");
@@ -74,9 +75,24 @@ public class InfoUserTask extends AsyncTask<Void, Void, Person> {
 
 		try {
 			response = client.execute(get);
+			
 
-			jsonString = EntityUtils.toString(response.getEntity());
+			if (response.getStatusLine().equals(204)) {
 
+				Toast.makeText(context, "Token not valid.",
+						Toast.LENGTH_LONG).show();
+
+				Intent i = new Intent(context, AuthenticationActivity.class);
+				context.startActivity(i);
+			}
+
+			if (response.getEntity() != null) {
+				jsonString = EntityUtils.toString(response.getEntity());
+			} else {
+				jsonString = "";
+				
+				
+			}
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -107,12 +123,15 @@ public class InfoUserTask extends AsyncTask<Void, Void, Person> {
 
 		progress.setVisibility(View.GONE);
 		progress.setIndeterminate(false);
-		
-		tViewInfo.setText(personInfo.getName()+" "+personInfo.getBirthdate());
-		
-		SharedPreferences.Editor editor = pref.edit();
-		editor.putLong("personId", result.getIdPerson());
-		editor.commit();
+
+		if (result != null) {
+			tViewInfo.setText(personInfo.getName() + " "
+					+ personInfo.getBirthdate());
+
+			SharedPreferences.Editor editor = pref.edit();
+			editor.putLong("personId", result.getIdPerson());
+			editor.commit();
+		}
 	}
 
 }

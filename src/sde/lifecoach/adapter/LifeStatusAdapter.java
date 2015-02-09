@@ -89,7 +89,7 @@ public class LifeStatusAdapter extends ArrayAdapter<LifeStatus> {
 //								tvGoal.setBackgroundColor(Color.GREEN);
 //							}
 
-							break;
+							//break;
 						}
 					}
 				} else {
