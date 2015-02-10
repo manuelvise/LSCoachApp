@@ -22,11 +22,13 @@ import android.widget.TextView;
 public class LifeStatusAdapter extends ArrayAdapter<LifeStatus> {
 
 	private List<Goal> goals;
+	private Context context;
 
 	public LifeStatusAdapter(Context context, int resource,
 			List<LifeStatus> objects, List<Goal> goals) {
 		super(context, resource, objects);
 		this.goals = goals;
+		this.context = context;
 	}
 
 	@Override
@@ -75,6 +77,7 @@ public class LifeStatusAdapter extends ArrayAdapter<LifeStatus> {
 									+ new Date(Long.valueOf(goal.getDeadline()))
 											.toString() + ", value: "
 									+ goal.getValue());
+							tvGoal.setTextColor(context.getResources().getColor(android.R.color.holo_green_dark));
 
 //							if ((Long.valueOf(goal.getValue()) > Long.valueOf(g
 //									.getValue()))
@@ -93,8 +96,9 @@ public class LifeStatusAdapter extends ArrayAdapter<LifeStatus> {
 						}
 					}
 				} else {
-					tvGoal.setText("No goal setted for this measureDefinition  ");
-					tvGoal.setBackgroundColor(Color.LTGRAY);
+//					tvGoal.setText("No goal setted ");
+//					tvGoal.setTextColor(context.getResources().getColor(android.R.color.black));
+//					tvGoal.setBackgroundColor(Color.LTGRAY);
 				}
 //				if (!found) {
 //

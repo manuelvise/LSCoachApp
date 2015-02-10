@@ -21,7 +21,7 @@
 
         <TextView
             android:id="@+id/textViewValue"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@android:color/black" />
@@ -50,16 +50,17 @@
             android:paddingLeft="10dp"
             android:textColor="@android:color/black" />
     
-    <TextView
-            android:id="@+id/textViewDiff"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:textColor="@android:color/holo_red_dark"
-            android:padding="7dp"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:paddingLeft="6dp" />
+
     
     </LinearLayout>
+    
+            <TextView
+            android:id="@+id/textViewDiff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/holo_red_dark"
+            android:text="No fixed goal for this type of measure"
+            android:padding="3dp"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </LinearLayout>
